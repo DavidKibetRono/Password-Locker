@@ -44,3 +44,23 @@ class TestCredentials(unittest.TestCase):
         test_user_credentials.save_credentials()
         self.new_user_credential.delete_credentials()  # Deleting a user object
         self.assertEqual(len(Credentials.use_credentials_list), 1)
+
+    # Fifth test ---check if user exist
+    def test_existance_by_username(self):
+        """test to check if we can find a user by username and display information"""
+
+        self.new_user_credential.save_credentials()
+        test_user_credentials = Credentials("twitter", "twitter##", "twitter1234")
+        test_user_credentials.save_credentials()
+        found_username = Credentials.find_by_username("twitter##")
+        self.assertEqual(found_username.username, test_user_credentials.username)
+
+    # Sixth test ---check if user exist
+    def test_existance_by_password(self):
+        """test to check if we can find a user by password and display information"""
+
+        self.new_user_credential.save_credentials()
+        test_user_credentials = Credentials("twitter", "twitter##", "twitter1234")
+        test_user_credentials.save_credentials()
+        found_password = Credentials.find_by_password("twitter1234")
+        self.assertEqual(found_password.password, test_user_credentials.password)
