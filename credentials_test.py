@@ -20,3 +20,27 @@ class TestCredentials(unittest.TestCase):
         self.assertEqual(self.new_user_credential.account,"email")
         self.assertEqual(self.new_user_credential.username,"kibet@gmail.com")
         self.assertEqual(self.new_user_credential.password,"Kibbs")
+
+    # Second Test --- check if it can save users
+    def test_save_user_credentials(self):
+        """test case to test if the if user credintials are saved"""
+
+        self.new_user_credential.save_credentials()
+        self.assertEqual(len(Credentials.use_credentials_list), 1)
+
+    # Third Test --- check if it can save multiple users
+    def test_save_multiple_user_credentials(self):
+        """A test case to check if we can save multiple user credential objects"""
+        self.new_user_credential.save_credentials()
+        test_user_credentials = Credentials("twitter", "twitter#", "twitter1234")
+        test_user_credentials.save_credentials()
+        self.assertEqual(len(Credentials.use_credentials_list), 2)
+
+    # Forth test ---check if we can delete users
+    def test_delete_user_credentials(self):
+        """test_delete_user_credentials to test if we can remove user_credentials from our   use_credentials_list"""
+        self.new_user_credential.save_credentials()
+        test_user_credentials = Credentials("twitter", "twitter##", "twitter1234")
+        test_user_credentials.save_credentials()
+        self.new_user_credential.delete_credentials()  # Deleting a user object
+        self.assertEqual(len(Credentials.use_credentials_list), 1)
