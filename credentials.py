@@ -19,3 +19,21 @@ class Credentials:
     def delete_credentials(self):
         """delete_credentials method deletes saved delete_credentials  from the use_credentials_list"""
         Credentials.use_credentials_list.remove(self)
+
+    # search by username
+    @classmethod
+    def find_by_username(cls, username):
+        """Method that takes in a username and returns a user that matches that username."""
+
+        for user_cred in cls.use_credentials_list:
+            if user_cred.username == username:
+                return user_cred
+
+    # search by password
+    @classmethod
+    def find_by_password(cls, password):
+        """Method that takes in a password and returns a user that matches that password. """
+
+        for user in cls.use_credentials_list:
+            if user.password == password:
+                return user
