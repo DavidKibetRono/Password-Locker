@@ -52,5 +52,17 @@ class TestUser(unittest.TestCase):
 
         self.found_user = User.find_user("David")
 
-    if __name__ == "__main__":
-        unittest.main()
+    def test_user_exists(self):
+        """check whether the user account exists in the user accounts list"""
+
+        self.found_user = User.user_exist("David")
+
+    # Displaying all users
+    def test_display_all_users(self):
+        """To return a list of all users"""
+
+        self.assertEqual(User.display_users(), User.user_list)
+
+if __name__ == "__main__":
+    unittest.main()
+
