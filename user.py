@@ -33,3 +33,17 @@ class User:
             if user.username == username:
                 return True
         return False
+
+    @classmethod
+    def check_user(cls, username, password):
+        """Check if user exists and if password is correct"""
+        user = cls.find_user(username)
+        if user and user.password == password:
+            return True
+        return False
+
+    # method to display all users
+    @classmethod
+    def display_users(cls):
+        """method to return all users"""
+        return cls.user_list
