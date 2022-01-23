@@ -37,3 +37,30 @@ class Credentials:
         for user in cls.use_credentials_list:
             if user.password == password:
                 return user
+
+        # Check account details by account name
+
+    @classmethod
+    def find_account_name(cls, my_account_name):
+        """Method that takes in a account_platform and returns a credentials that matches that account_platform."""
+        for credentials in cls.use_credentials_list:
+            if credentials.account == my_account_name:
+                return credentials
+        return False
+
+        # Display all credentials
+
+    @classmethod
+    def display_user_credentials(cls):
+        """method to display all user credentials"""
+        return cls.use_credentials_list
+
+    # Verifying login details
+    @classmethod
+    def verification_of_users(self, username, password):
+        """Method to verify user details"""
+        our_user_details = ''
+        for user in Credentials.use_credentials_list:
+            if (user.username == username and user.password == password):
+                our_user_details = user.username
+                return our_user_details
