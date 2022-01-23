@@ -22,7 +22,7 @@ class Credentials:
 
     # search by username
     @classmethod
-    def find_by_username(cls, username):
+    def find_by_username(cls,username):
         """Method that takes in a username and returns a user that matches that username."""
 
         for user_cred in cls.use_credentials_list:
@@ -38,8 +38,7 @@ class Credentials:
             if user.password == password:
                 return user
 
-        # Check account details by account name
-
+    # Check account details by account name
     @classmethod
     def find_account_name(cls, my_account_name):
         """Method that takes in a account_platform and returns a credentials that matches that account_platform."""
@@ -49,18 +48,31 @@ class Credentials:
         return False
 
         # Display all credentials
-
     @classmethod
     def display_user_credentials(cls):
         """method to display all user credentials"""
-        return cls.use_credentials_list
+        return  cls.use_credentials_list
 
     # Verifying login details
     @classmethod
-    def verification_of_users(self, username, password):
+    def verification_of_users(self,username,password):
         """Method to verify user details"""
         our_user_details = ''
         for user in Credentials.use_credentials_list:
             if (user.username == username and user.password == password):
                 our_user_details = user.username
                 return our_user_details
+
+    @classmethod
+    def generateLockerPassword(cls,length):
+        """Function to generate random locker password"""
+        password_generator = string.ascii_uppercase + string.ascii_lowercase + string.digits + "%~#$^&!@*"
+        return ''.join(random.choice(password_generator) for i in range(length))
+
+    @classmethod
+    def copy_account_name(cls,username):
+        """ Method to copy account name from the credentials"""
+        cred_found = Credentials.find_by_username(username)
+        pyperclip.copy(cred_found.account)
+
+
