@@ -20,3 +20,18 @@ def save_user(user):
  Function to save a new user
     """
     user.save_user()
+
+# Deleting a user
+def delete_user():
+    """
+   Function to delete a user
+    """
+    User.delete_user()
+
+
+def check_existing_user(username):  # check if the user exists
+    """
+    check if user exists
+    """
+    return User.user_exist(username)
+
