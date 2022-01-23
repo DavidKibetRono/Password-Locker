@@ -73,3 +73,29 @@ def create_new_credential(acc_name, acc_username, password):
     new_credential = Credentials(acc_name, acc_username, password)
     return new_credential
 
+
+def login_user_details(username,password):
+    """
+    method to allow users to login
+
+    """
+    logged_username=Credentials.verification_of_users(username,password)
+    return logged_username
+
+
+# Display credentials
+def show_credentials():
+    """
+    function to show all credentials
+
+    """
+    return Credentials.display_user_credentials()
+
+
+def generate_Locker_Password(pwd_length):
+    """
+    function to generate password
+
+    """
+    new_pwd=Credentials.generateLockerPassword(pwd_length)
+    return new_pwd
