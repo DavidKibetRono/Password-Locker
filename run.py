@@ -35,3 +35,20 @@ def check_existing_user(username):  # check if the user exists
     """
     return User.user_exist(username)
 
+
+# Finding a user by username
+def find_user_by_username(username):
+    """
+    Function to find a user
+    """
+
+    return User.find_user(username)
+
+
+# Finding a user by password
+def check_user_password(username,password):
+    """
+    Function to find a user
+    """
+    return User.check_user(username, password)
+
