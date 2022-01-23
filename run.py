@@ -52,3 +52,24 @@ def check_user_password(username,password):
     """
     return User.check_user(username, password)
 
+# Find account to be deleted
+def find_account_by_username(name_of_account):
+    """ Method to find the existing account depending on the account name input"""
+
+    return Credentials.find_account_name(name_of_account)
+
+
+def save_credentials(credentials):  # save credentials
+    """
+    function to save credentials
+    """
+    credentials.save_credentials()
+
+
+def create_new_credential(acc_name, acc_username, password):
+    """
+    function to create a new credential
+    """
+    new_credential = Credentials(acc_name, acc_username, password)
+    return new_credential
+
