@@ -99,3 +99,111 @@ def generate_Locker_Password(pwd_length):
     """
     new_pwd=Credentials.generateLockerPassword(pwd_length)
     return new_pwd
+
+# My main method
+def password_locker():
+    """Main Method"""
+    while True:
+        c.print("Please select one of the option to  proceed.""\n "
+              "LA - Login to your account?""\n "
+              "RA -  Register a new  account?""\n "
+                "EX -  Exit password locker application?""\n ",style='blue')
+        abbr = input().lower()
+        if abbr == "ra":  # user has selected register option
+            c.print("Enter your username .....",style="blue")
+            username = input()
+            c.print("Enter your password .....",style="blue")
+            password = input()
+
+            save_user(create_user(username, password))
+            c.print("######################################",style="black on white")
+            c.print(f'Congratulations {username} your have successfully created an account',style="bold green")
+            c.print("######################################",style="black on white")
+            print("\n")
+
+        elif abbr=="la": # user has selected a login option
+            c.print("Enter your username ...",style="blue")
+            username = input()
+            c.print("Enter your password ...",style="blue")
+            user_password = input()
+            if check_existing_user(username):  # check if user exists
+                if check_user_password(username, user_password):   # check if password is correct
+                    c.print("######################################",style="white on black")
+
+                    c.print(f"Hello {username}.Welcome To Password Locker Manager",style="green")
+                    c.print("######################################",style="white on black")
+
+                    while True:
+                        c.print("Select one of the following options to continue: \n ",style="blue")
+                        c.print("cc - Create a new credential\n "
+                              "vc - View saved credentials\n "
+                              "dc- Delete credentials\n "
+                              "lt - Logout",style="blue")
+
+                        short_code_abbr = input().lower().strip()
+                        if short_code_abbr == "cc": # user creates  new credentials
+                            c.print("Enter account name: ",style="blue")
+                            acc_name=input()
+                            c.print("Enter username of account: ",style="blue")
+                            acc_username=input()
+
+                            c.print("Select one of the following on passwords" "\n "
+                                    "gp - Generate password..." "\n "
+                                    "mp - Enter your own password...\n ",style="blue")
+
+                            selected_option = input().lower().strip()
+
+                            if selected_option == 'mp':
+                                password = input("Enter Password:\n ")
+
+                            elif selected_option == 'gp':
+                                dictated_password_length = int(input("Enter the length of password you want: "))
+
+                                password = generate_Locker_Password(dictated_password_length)
+                                c.print(f"Your password is {password}",style="green")
+                            else:
+                                c.print("Wrong input selection!!!",style="bold red")
+                            save_credentials(create_new_credential(acc_name, acc_username, password))
+
+                            c.print(
+                                f"New Credential with account name '{acc_name}' and password '{password}' has been created \n ",style="green")
+
+                        elif short_code_abbr=="vc": # View saved credentials
+
+                            print("All credentials are as follows: ")
+                            if show_credentials():
+                                for data in show_credentials():
+                                    c.print(f'Account: {data.account}, Username: {data.username} and Password: {data.password}',style="black on white")
+                            else:
+                                c.print("There is no any saved data",style="red")
+
+                        elif short_code_abbr == "dc":  # Deleting credentials
+                            c.print("Enter account name to delete: ",style="blue")
+                            account_i_want_to_delete=input()
+                            if find_account_by_username(account_i_want_to_delete):
+                                c.print(f'Account {account_i_want_to_delete} has been successfully deleted',style="bold red")
+                            else:
+                                c.print(f" Account {account_i_want_to_delete} does not exist!!!",style="red")
+                        elif short_code_abbr=="lt":  # Logging out from the application
+                            c.print("You have successfully logged out!!!",style=" bold white on red")
+                            break
+                        else:  # no found account
+                            c.print("There is no such account!!",style="bold red")
+                else:
+                    c.print("Invalid password ...please try again", style="red")
+
+
+            else:
+                c.print("Invalid username or password...Please try again",style="red")
+
+        elif abbr == "ex":
+            c.print("Thank you for interacting with password locker, bye---.",style="bold yellow")
+            break
+        else:
+            c.print("Invalid Option ",style="bold yellow")
+
+
+if __name__ == "__main__":
+    password_locker()
+
+
